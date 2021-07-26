@@ -1,0 +1,2 @@
+rootProject.name = "AccessNfc"
+include ':app'
