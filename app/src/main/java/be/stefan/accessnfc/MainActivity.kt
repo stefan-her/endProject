@@ -1,32 +1,28 @@
 package be.stefan.accessnfc
 
 import android.content.Context
-import android.content.DialogInterface
+import android.content.Intent
 import android.net.ConnectivityManager
-import android.net.Network
 import android.net.NetworkCapabilities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.text.BoringLayout
+import android.provider.Settings
 import android.util.Log
-import android.view.Window
-import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+
 import androidx.appcompat.app.AlertDialog
 
 import be.stefan.accessnfc.fragments.ConnectFragment
 import be.stefan.accessnfc.fragments.WelcomeFragment
 
-
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         init()
-
-        val connect = isNetworkAvailable()
-        Log.i("internet ou pas ----->", connect.toString());
-        if(!connect) { alertDialogNetwork() }
+        checkNetworkAvailable();
     }
 
     private fun alertDialogNetwork() {
@@ -46,23 +42,32 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun activeNetwork() {
-        Toast.makeText(applicationContext, "on ouvre", Toast.LENGTH_LONG).show()
+        val intent = Intent(Settings.ACTION_WIRELESS_SETTINGS)
+        resultLauncher.launch(intent)
     }
 
+    private fun checkNetworkAvailable() {
+        val connect = isNetworkAvailable()
+        Log.i("internet ou pas ----->", connect.toString())
+        if(!connect) { alertDialogNetwork() }
+        else { gotoConnectFragment() }
+    }
+
+    private var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        checkNetworkAvailable()
+    }
 
     private fun isNetworkAvailable() : Boolean {
         var result = false
         val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        if(cm is ConnectivityManager) {
-            val networkCapabilities = cm.activeNetwork
-            val activeNetwork = (cm.getNetworkCapabilities(networkCapabilities))
-            if (activeNetwork != null) {
-                result = when {
-                    activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
-                    activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
-                    activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
-                    else -> false
-                }
+        val networkCapabilities = cm.activeNetwork
+        val activeNetwork = (cm.getNetworkCapabilities(networkCapabilities))
+        if (activeNetwork != null) {
+            result = when {
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
+                else -> false
             }
         }
         return result
