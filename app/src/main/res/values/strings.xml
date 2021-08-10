@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">AccessNfc</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="meetingpoint">meetingPoint</string>
+    <string name="connection">Connexion</string>
+    <string name="connectionlost">Pas de Connexion à internet</string>
+    <string name="activeConnection">Activer ma connexion</string>
+    <string name="close">Fermer</string>
 </resources>
