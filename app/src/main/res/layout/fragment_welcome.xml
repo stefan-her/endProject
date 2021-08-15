@@ -20,6 +20,17 @@
             tools:layout_editor_absoluteX="16dp" />
 
         <TextView
+            android:id="@+id/test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="rien"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="38dp"
+            tools:layout_editor_absoluteY="332dp" />
+
+        <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

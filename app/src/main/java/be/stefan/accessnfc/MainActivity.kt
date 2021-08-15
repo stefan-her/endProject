@@ -2,8 +2,12 @@ package be.stefan.accessnfc
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 
 import be.stefan.accessnfc.fragments.WelcomeFragment
+import java.io.InputStream
+import java.net.HttpURLConnection
+import java.net.URL
 
 class MainActivity : AppCompatActivity() {
 
