@@ -7,4 +7,8 @@
     <string name="connectionlost">Pas de Connexion à internet</string>
     <string name="activeConnection">Activer ma connexion</string>
     <string name="close">Fermer</string>
+    <string name="adresApp">Inserer l\'adresse distante de l\'application</string>
+    <string name="valid">valider</string>
+    <string name="remoteApp">Adresse distante</string>
+    <string name="unknownAddress">adresse inconnue</string>
 </resources>

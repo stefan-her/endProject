@@ -1,13 +1,18 @@
 package be.stefan.accessnfc.fragments
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
+import androidx.core.content.ContextCompat.getSystemService
 import be.stefan.accessnfc.R
+import be.stefan.accessnfc.api.LoginUser
 import be.stefan.accessnfc.models.SharedPref
 
 class ConnectFragment : Fragment() {
@@ -26,16 +31,38 @@ class ConnectFragment : Fragment() {
         et_email = v.findViewById(R.id.et_email)
         et_pwd = v.findViewById(R.id.et_pwd)
         bt_connect = v.findViewById(R.id.bt_connection)
-        bt_connect.setOnClickListener { addToSharedPreferences(); }
+        bt_connect.setOnClickListener {
+            addToSharedPreferences()
+            activity?.hideKeyboard(it)
+            LoginUser(requireContext()){
+                val addFragment = MeetingFragment.newInstance()
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .setCustomAnimations(
+                        android.R.anim.slide_in_left,
+                        android.R.anim.fade_out,
+                        android.R.anim.fade_in,
+                        android.R.anim.slide_out_right
+                    )
+                    .addToBackStack(null)
+                    .replace(R.id.container_fragment, addFragment)
+                    .commit()
+            }
+        }
 
         return v
     }
 
-    private fun addToSharedPreferences() {
-        val els = mapOf("email" to et_email.text.toString(), "pwd" to et_pwd.text.toString())
-        activity?.let { SharedPref(it.applicationContext) }?.setLoginUser(els)
+    private fun Context.hideKeyboard(view: View) {
+        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
+    private fun addToSharedPreferences() {
+        val els = mapOf("email" to et_email.text.toString(), "pwd" to et_pwd.text.toString())
+        activity?.let {
+            SharedPref("loginUser", it.applicationContext)
+        }?.setLoginUser(els)
+    }
 
     companion object {
         fun newInstance() = ConnectFragment()
