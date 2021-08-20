@@ -9,7 +9,7 @@ class SharedPref(node: String, context: Context) {
     private val PREF_USER_PWD = "pwd"
     private val PREF_USER_FIRSTNAME = "firstname"
     private val PREF_USER_LASTNAME = "lastname"
-    private val PREF_USER_UUID = "uuid"
+    private val PREF_USER_APIKEY = "apikey"
     private val PREF_ACCESSAPP = "url"
 
     private val pref : SharedPreferences = context.getSharedPreferences(node, Context.MODE_PRIVATE)
@@ -20,7 +20,7 @@ class SharedPref(node: String, context: Context) {
         pref.getString(PREF_USER_PWD, null)?.let { values.put(PREF_USER_PWD, it) }
         pref.getString(PREF_USER_FIRSTNAME, null)?.let { values.put(PREF_USER_FIRSTNAME, it) }
         pref.getString(PREF_USER_LASTNAME, null)?.let { values.put(PREF_USER_LASTNAME, it) }
-        pref.getString(PREF_USER_UUID, null)?.let { values.put(PREF_USER_UUID, it) }
+        pref.getString(PREF_USER_APIKEY, null)?.let { values.put(PREF_USER_APIKEY, it) }
         return values
     }
 
@@ -30,7 +30,7 @@ class SharedPref(node: String, context: Context) {
         values[PREF_USER_PWD]?.let { editor.putString(PREF_USER_PWD, values[PREF_USER_PWD]) }
         values[PREF_USER_FIRSTNAME]?.let { editor.putString(PREF_USER_FIRSTNAME, values[PREF_USER_FIRSTNAME]) }
         values[PREF_USER_LASTNAME]?.let { editor.putString(PREF_USER_LASTNAME, values[PREF_USER_LASTNAME]) }
-        values[PREF_USER_UUID]?.let { editor.putString(PREF_USER_UUID, values[PREF_USER_UUID]) }
+        values[PREF_USER_APIKEY]?.let { editor.putString(PREF_USER_APIKEY, values[PREF_USER_APIKEY]) }
         editor.apply()
     }
 

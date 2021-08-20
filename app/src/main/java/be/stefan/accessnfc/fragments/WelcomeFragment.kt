@@ -25,13 +25,11 @@ import com.android.volley.Request
 import com.android.volley.VolleyLog
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class WelcomeFragment : Fragment() {
 
     lateinit var progressBar : ProgressBar
+    //val TYPEFRAGS : List<String> = listOf("connection", "meeting")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -161,31 +159,30 @@ class WelcomeFragment : Fragment() {
         val loginUser = sharedPref.getLoginUser()
 
         if((loginUser["email"] != null) && (loginUser["pwd"] != null)) { connectApp(loginUser) }
-        else { gotoConnectFragment() }
+        else { gotoFragment("connection") }
     }
 
     private fun connectApp(login: MutableMap<String, String>) {
         Log.d("connectApp----->", "on essaye")
         LoginUser(requireContext()) {
-            val addFragment = MeetingFragment.newInstance()
-            requireActivity().supportFragmentManager.beginTransaction()
-                .setCustomAnimations(
-                    android.R.anim.slide_in_left,
-                    android.R.anim.fade_out,
-                    android.R.anim.fade_in,
-                    android.R.anim.slide_out_right
-                )
-                .addToBackStack(null)
-                .replace(R.id.container_fragment, addFragment)
-                .commit()
+            Log.d("connect ----->", it.toString());
+
+            if(!it) { gotoFragment("connection") }
+            else { gotoFragment("meeting") }
         }
     }
 
-    private fun gotoConnectFragment() {
+    private fun gotoFragment(type : String) {
         object : CountDownTimer(5000, 1000) {
             override fun onTick(millisUntilFinished: Long) {}
             override fun onFinish() {
-                val addFragment = ConnectFragment.newInstance()
+
+                val frag = when(type) {
+                    "connection" -> ConnectFragment.newInstance()
+                    "meeting" -> MeetingFragment.newInstance()
+                    else -> ConnectFragment.newInstance()
+                }
+
                 requireActivity().supportFragmentManager.beginTransaction()
                     .setCustomAnimations(
                         android.R.anim.slide_in_left,
@@ -194,7 +191,7 @@ class WelcomeFragment : Fragment() {
                         android.R.anim.slide_out_right
                     )
                     .addToBackStack(null)
-                    .replace(R.id.container_fragment, addFragment)
+                    .replace(R.id.container_fragment, frag)
                     .commit()
             }
         }.start()
