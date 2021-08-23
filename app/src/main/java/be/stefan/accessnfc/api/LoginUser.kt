@@ -14,7 +14,7 @@ import org.json.JSONTokener
 
 class LoginUser(context: Context, lambda : (connect : Boolean) -> Unit) {
 
-    private val URL_LOGINUSER = "/api/get_userInfos.php/"
+    private val URL_LOGINUSER = "/api/get_userInfos.php"
     private var url : String
     private val lambdaParam = lambda
     private var connect : Boolean = false
@@ -39,15 +39,17 @@ class LoginUser(context: Context, lambda : (connect : Boolean) -> Unit) {
                     var strResp = response.toString()
                     Log.d("API", strResp)
                         if(strResp.trim() == "null") {
-                           sharedPrefUser.clearNode()
+                            sharedPrefUser.clearNode()
                         } else {
                             val jsonObject = JSONTokener(response).nextValue() as JSONObject
                             if(!jsonObject.has("empty")) {
-                                val map = mapOf("firstname" to jsonObject.getString("firstname"),
+                                val map = mapOf(
+                                    "firstname" to jsonObject.getString("firstname"),
                                     "lastname" to jsonObject.getString("lastname"),
                                     "apikey" to jsonObject.getString("apikey"),
                                     "email" to loginUser["email"],
-                                    "pwd" to loginUser["pwd"])
+                                    "pwd" to loginUser["pwd"]
+                                )
                                 sharedPrefUser.setLoginUser(map as Map<String, String>)
                                 connect = true
                             } else {

@@ -2,6 +2,7 @@ package be.stefan.accessnfc.models
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 
 class SharedPref(node: String, context: Context) {
 

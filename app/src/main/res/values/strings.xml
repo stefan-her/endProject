@@ -11,4 +11,7 @@
     <string name="valid">valider</string>
     <string name="remoteApp">Adresse distante</string>
     <string name="unknownAddress">adresse inconnue</string>
+    <string name="logout">déconnexion</string>
+    <string name="openDrawer">Ouvrir le menu</string>
+    <string name="closeDrawer">Fermer le menu</string>
 </resources>
