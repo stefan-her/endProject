@@ -11,9 +11,11 @@
     tools:openDrawer="start">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/background">
+
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
@@ -28,7 +30,11 @@
         <FrameLayout
             android:id="@+id/container_fragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="676dp"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="56dp" />
+
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
@@ -38,6 +44,7 @@
         android:id="@+id/nav_view"
         app:headerLayout="@layout/menu_header"
         app:menu="@menu/drawer_menu"
+        app:itemTextColor="@color/background"
         />
 
 

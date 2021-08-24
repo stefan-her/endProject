@@ -14,4 +14,5 @@
     <string name="logout">déconnexion</string>
     <string name="openDrawer">Ouvrir le menu</string>
     <string name="closeDrawer">Fermer le menu</string>
+    <string name="meetingList">liste des réunions</string>
 </resources>

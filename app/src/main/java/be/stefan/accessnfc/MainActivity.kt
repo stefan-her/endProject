@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         drawerLayout = findViewById(R.id.drawer_layout)
 
         val navigationView : NavigationView = findViewById(R.id.nav_view)
+        navigationView.setBackgroundColor(resources.getColor(R.color.white))
         navigationView.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.nav_logout -> {

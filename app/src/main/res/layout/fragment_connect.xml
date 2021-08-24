@@ -1,50 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background">
+        android:background="@color/background"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="290dp"
-            android:src="@drawable/meetingblur"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@null"
-            tools:layout_editor_absoluteX="16dp" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                tools:ignore="MissingConstraints">
 
-        <androidx.cardview.widget.CardView
-            android:background="@color/white"
-            android:id="@+id/cardView"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            app:cardCornerRadius="100dp"
-            android:backgroundTint="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.355">
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="290dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/meetingblur"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:layout_editor_absoluteX="16dp" />
 
-            <ImageView
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_baseline_person_24" />
-        </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:background="@color/white"
+                    android:backgroundTint="@color/white"
+                    app:cardCornerRadius="100dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.497"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1.0">
+
+                    <ImageView
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_baseline_person_24" />
+                </androidx.cardview.widget.CardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="280dp"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
-            tools:layout_editor_absoluteX="1dp">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
+            app:layout_constraintVertical_bias="0.0">
 
             <TextView
                 android:id="@+id/email"
@@ -84,32 +99,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="40sp"
                 android:layout_marginHorizontal="50sp"
-                app:layout_constraintTop_toBottomOf="@+id/pwd"
-                tools:layout_editor_absoluteX="16dp"
-                android:textSize="20sp"
+                android:backgroundTint="@color/white"
                 android:inputType="textPassword"
                 android:textColor="@color/white"
-                android:backgroundTint="@color/white"/>
+                android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@+id/pwd"
+                tools:layout_editor_absoluteX="16dp" />
 
             <Button
                 android:id="@+id/bt_connection"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/et_pwd"
-                android:layout_marginTop="20dp"
                 android:layout_marginHorizontal="50sp"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/topview"
                 android:text="Connexion"
-                android:backgroundTint="@color/topview"/>
+                app:layout_constraintTop_toBottomOf="@+id/et_pwd" />
 
             <TextView
                 android:id="@+id/error"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="50sp"
+                android:gravity="center_horizontal"
                 android:text="erreur de connexion"
                 android:textColor="@color/design_default_color_error"
                 android:textSize="20sp"
-                android:gravity="center_horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/bt_connection"
                 tools:layout_editor_absoluteX="50dp" />
